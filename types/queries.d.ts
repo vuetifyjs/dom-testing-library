@@ -313,3 +313,27 @@ export function findByTestId<T extends HTMLElement = HTMLElement>(
 export function findAllByTestId<T extends HTMLElement = HTMLElement>(
   ...args: Parameters<FindAllByBoundAttribute<T>>
 ): ReturnType<FindAllByBoundAttribute<T>>
+export function getByCSS<T extends HTMLElement = HTMLElement>(
+  container,
+  selector: Matcher,
+): T
+export function getAllByCSS<T extends HTMLElement = HTMLElement>(
+  container,
+  selector: Matcher,
+): T[]
+export function queryByCSS<T extends HTMLElement = HTMLElement>(
+  container,
+  selector: Matcher,
+): T | null
+export function queryAllByCSS<T extends HTMLElement = HTMLElement>(
+  container,
+  selector: Matcher,
+): T[]
+export function findByCSS<T extends HTMLElement = HTMLElement>(
+  container,
+  selector: Matcher,
+): Promise<T>
+export function findAllByCSS<T extends HTMLElement = HTMLElement>(
+  container,
+  selector: Matcher,
+): Promise<T[]>

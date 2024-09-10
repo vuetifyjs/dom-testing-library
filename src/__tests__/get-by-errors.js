@@ -94,6 +94,10 @@ cases(
       query: /his/,
       html: `<div data-testid="his"></div><div data-testid="history"></div>`,
     },
+    queryByCSS: {
+      query: 'div',
+      html: `<div>his</div><div>history</div>`,
+    },
   },
 )
 
@@ -114,4 +118,9 @@ describe('*ByDisplayValue queries throw an error when there are multiple element
       /multiple elements with the display value:/i,
     )
   })
+})
+
+test('*ByCSS throws an error when the selector is not a string', () => {
+  const {getByCSS} = render(`<div />`)
+  expect(() => getByCSS(2)).toThrow(/expected selector to be a string/i)
 })

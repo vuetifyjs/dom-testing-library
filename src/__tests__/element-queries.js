@@ -22,6 +22,7 @@ test('query can return null', () => {
     queryByText,
     queryByTestId,
     queryByAltText,
+    queryByCSS,
   } = render('<div />')
   expect(queryByTestId('LucyRicardo')).toBeNull()
   expect(queryByLabelText('LucyRicardo')).toBeNull()
@@ -29,6 +30,7 @@ test('query can return null', () => {
   expect(queryByPlaceholderText('LucyRicardo')).toBeNull()
   expect(queryByText('LucyRicardo')).toBeNull()
   expect(queryByAltText('LucyRicardo')).toBeNull()
+  expect(queryByCSS('LucyRicardo')).toBeNull()
 })
 
 test('get throws a useful error message', () => {
@@ -41,6 +43,7 @@ test('get throws a useful error message', () => {
     getByAltText,
     getByTitle,
     getByRole,
+    getByCSS,
   } = render(
     `<div></div><!-- Ignored comment --><style type="text/css">body {} </style><script type="text/javascript></script>`,
   )
@@ -125,6 +128,14 @@ test('get throws a useful error message', () => {
     Unable to find an accessible element with the role "LucyRicardo"
 
     There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the \`hidden\` option to \`true\`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+    Ignored nodes: comments, script, style
+    <div>
+      <div />
+    </div>
+  `)
+  expect(() => getByCSS('LucyRicardo')).toThrowErrorMatchingInlineSnapshot(`
+    Unable to find an element by selector: LucyRicardo
 
     Ignored nodes: comments, script, style
     <div>

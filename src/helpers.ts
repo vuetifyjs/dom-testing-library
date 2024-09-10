@@ -74,13 +74,13 @@ function checkContainerType(container: unknown) {
       )}.`,
     )
   }
+}
 
-  function getTypeName(object: unknown) {
-    if (typeof object === 'object') {
-      return object === null ? 'null' : object.constructor.name
-    }
-    return typeof object
+function getTypeName(object: unknown) {
+  if (typeof object === 'object') {
+    return object === null ? 'null' : object.constructor.name
   }
+  return typeof object
 }
 
 export {
@@ -88,5 +88,6 @@ export {
   getDocument,
   checkContainerType,
   jestFakeTimersAreEnabled,
+  getTypeName,
   TEXT_NODE,
 }

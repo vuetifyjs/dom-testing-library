@@ -25,6 +25,9 @@ test('find asynchronously finds elements', async () => {
 
     findByTestId,
     findAllByTestId,
+
+    findByCSS,
+    findAllByCSS,
   } = render(`
     <div>
       <div data-testid="test-id" aria-label="test-label">test text content</div>
@@ -74,6 +77,9 @@ test('find asynchronously finds elements', async () => {
 
   await expect(findByTestId('test-id')).resolves.toBeTruthy()
   await expect(findAllByTestId('test-id')).resolves.toHaveLength(1)
+
+  await expect(findByCSS('input[type="hidden"]')).resolves.toBeTruthy()
+  await expect(findAllByCSS('input[type="hidden"]')).resolves.toHaveLength(1)
 })
 
 test('find rejects when something cannot be found', async () => {
@@ -101,6 +107,9 @@ test('find rejects when something cannot be found', async () => {
 
     findByTestId,
     findAllByTestId,
+
+    findByCSS,
+    findAllByCSS,
   } = render(`<div />`)
 
   // I just don't want multiple lines for these.
@@ -132,6 +141,9 @@ test('find rejects when something cannot be found', async () => {
 
   await expect(findByTestId('x', qo, wo)).rejects.toThrow('x')
   await expect(findAllByTestId('x', qo, wo)).rejects.toThrow('x')
+
+  await expect(findByCSS('x', qo, wo)).rejects.toThrow('x')
+  await expect(findAllByCSS('x', qo, wo)).rejects.toThrow('x')
 })
 
 test('actually works with async code', async () => {
