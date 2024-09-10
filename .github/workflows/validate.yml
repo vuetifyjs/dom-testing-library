@@ -70,7 +70,7 @@ jobs:
     needs: main
     runs-on: ubuntu-latest
     if:
-      ${{ github.repository == 'testing-library/dom-testing-library' &&
+      ${{ github.repository == 'vuetifyjs/dom-testing-library' &&
       github.event_name == 'push' }}
     steps:
       - name: ⬇️ Checkout repo
