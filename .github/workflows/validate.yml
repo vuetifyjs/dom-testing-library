@@ -55,13 +55,6 @@ jobs:
       - name: ▶️ Run validate script
         run: npm run validate
 
-      - name: ⬆️ Upload coverage report
-        uses: codecov/codecov-action@v4
-        with:
-          fail_ci_if_error: true
-          flags: node-${{ matrix.node }}
-          token: ${{ secrets.CODECOV_TOKEN }} # required
-
   release:
     permissions:
       contents: write #  to create release tags (cycjimmy/semantic-release-action)
