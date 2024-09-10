@@ -4,8 +4,8 @@
   "description": "Simple and complete DOM testing utilities that encourage good testing practices.",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
-  "module": "dist/@testing-library/dom.esm.js",
-  "umd:main": "dist/@testing-library/dom.umd.js",
+  "module": "dist/@vuetify/testing-library-dom.esm.js",
+  "umd:main": "dist/@vuetify/testing-library-dom.umd.js",
   "source": "src/index.js",
   "keywords": [
     "testing",
