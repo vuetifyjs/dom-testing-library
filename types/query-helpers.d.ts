@@ -15,14 +15,14 @@ export interface SelectorMatcherOptions extends MatcherOptions {
 
 export type QueryByAttribute = (
   attribute: string,
-  container: HTMLElement,
+  container: Element,
   id: Matcher,
   options?: MatcherOptions,
 ) => HTMLElement | null
 
 export type AllByAttribute = (
   attribute: string,
-  container: HTMLElement,
+  container: Element,
   id: Matcher,
   options?: MatcherOptions,
 ) => HTMLElement[]
@@ -31,14 +31,14 @@ export const queryByAttribute: QueryByAttribute
 export const queryAllByAttribute: AllByAttribute
 export function getElementError(
   message: string | null,
-  container: HTMLElement,
+  container: Element,
 ): Error
 
 /**
  * query methods have a common call signature. Only the return type differs.
  */
 export type QueryMethod<Arguments extends any[], Return> = (
-  container: HTMLElement,
+  container: Element,
   ...args: Arguments
 ) => Return
 export type QueryBy<Arguments extends any[]> = QueryMethod<

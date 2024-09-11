@@ -20,7 +20,7 @@ import {
 } from './all-utils'
 
 function queryAllLabels(
-  container: HTMLElement,
+  container: Element,
 ): {textToMatch: string | null; node: HTMLElement}[] {
   return Array.from(container.querySelectorAll<HTMLElement>('label,input'))
     .map(node => {

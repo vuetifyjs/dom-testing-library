@@ -29,7 +29,7 @@ export interface MatcherOptions {
 
 export type Match = (
   textToMatch: string,
-  node: HTMLElement | null,
+  node: Element | null,
   matcher: Matcher,
   options?: MatcherOptions,
 ) => boolean

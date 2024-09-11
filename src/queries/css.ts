@@ -2,7 +2,7 @@ import {checkContainerType, getTypeName} from '../helpers'
 import {GetErrorFunction, Matcher} from '../../types'
 import {buildQueries} from './all-utils'
 
-const queryAllByCSS = (container: HTMLElement, selector: Matcher) => {
+const queryAllByCSS = (container: Element, selector: Matcher) => {
   checkContainerType(container)
   if (typeof selector !== 'string') {
     throw new TypeError(

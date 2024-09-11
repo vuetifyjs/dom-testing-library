@@ -1,14 +1,11 @@
-export function logRoles(
-  container: HTMLElement,
-  options?: LogRolesOptions,
-): string
+export function logRoles(container: Element, options?: LogRolesOptions): string
 
 interface LogRolesOptions {
   hidden?: boolean
 }
 
-export function getRoles(container: HTMLElement): {
-  [index: string]: HTMLElement[]
+export function getRoles(container: Element): {
+  [index: string]: Element[]
 }
 
 /**

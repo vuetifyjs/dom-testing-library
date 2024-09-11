@@ -12,14 +12,11 @@ import {fuzzyMatches, matches, makeNormalizer} from './matches'
 import {waitFor} from './wait-for'
 import {getConfig} from './config'
 
-function getElementError(message: string | null, container: HTMLElement) {
+function getElementError(message: string | null, container: Element) {
   return getConfig().getElementError(message, container)
 }
 
-function getMultipleElementsFoundError(
-  message: string,
-  container: HTMLElement,
-) {
+function getMultipleElementsFoundError(message: string, container: Element) {
   return getElementError(
     `${message}\n\n(If this is intentional, then use the \`*AllBy*\` variant of the query (like \`queryAllByText\`, \`getAllByText\`, or \`findAllByText\`)).`,
     container,
@@ -28,7 +25,7 @@ function getMultipleElementsFoundError(
 
 function queryAllByAttribute(
   attribute: string,
-  container: HTMLElement,
+  container: Element,
   text: Matcher,
   {exact = true, collapseWhitespace, trim, normalizer}: MatcherOptions = {},
 ): HTMLElement[] {
@@ -43,7 +40,7 @@ function queryAllByAttribute(
 
 function queryByAttribute(
   attribute: string,
-  container: HTMLElement,
+  container: Element,
   text: Matcher,
   options?: MatcherOptions,
 ) {
@@ -64,7 +61,7 @@ function makeSingleQuery<Arguments extends unknown[]>(
   allQuery: QueryMethod<Arguments, HTMLElement[]>,
   getMultipleError: GetErrorFunction<Arguments>,
 ) {
-  return (container: HTMLElement, ...args: Arguments) => {
+  return (container: Element, ...args: Arguments) => {
     const els = allQuery(container, ...args)
     if (els.length > 1) {
       const elementStrings = els
@@ -86,7 +83,7 @@ ${elementStrings}`,
 
 function getSuggestionError(
   suggestion: {toString(): string},
-  container: HTMLElement,
+  container: Element,
 ) {
   return getConfig().getElementError(
     `A better query is available, try this:
@@ -99,10 +96,10 @@ ${suggestion.toString()}
 // this accepts a query function and returns a function which throws an error
 // if an empty list of elements is returned
 function makeGetAllQuery<Arguments extends unknown[]>(
-  allQuery: (container: HTMLElement, ...args: Arguments) => HTMLElement[],
+  allQuery: (container: Element, ...args: Arguments) => HTMLElement[],
   getMissingError: GetErrorFunction<Arguments>,
 ) {
-  return (container: HTMLElement, ...args: Arguments) => {
+  return (container: Element, ...args: Arguments) => {
     const els = allQuery(container, ...args)
     if (!els.length) {
       throw getConfig().getElementError(
@@ -119,13 +116,13 @@ function makeGetAllQuery<Arguments extends unknown[]>(
 // waitFor and passing a function which invokes the getter.
 function makeFindQuery<QueryFor, QueryMatcher>(
   getter: (
-    container: HTMLElement,
+    container: Element,
     text: QueryMatcher,
     options: MatcherOptions,
   ) => QueryFor,
 ) {
   return (
-    container: HTMLElement,
+    container: Element,
     text: QueryMatcher,
     options: MatcherOptions,
     waitForOptions: WaitForOptions,
@@ -141,11 +138,11 @@ function makeFindQuery<QueryFor, QueryMatcher>(
 
 const wrapSingleQueryWithSuggestion =
   <Arguments extends [...unknown[], WithSuggest]>(
-    query: (container: HTMLElement, ...args: Arguments) => HTMLElement | null,
+    query: (container: Element, ...args: Arguments) => HTMLElement | null,
     queryAllByName: string,
     variant: Variant,
   ) =>
-  (container: HTMLElement, ...args: Arguments) => {
+  (container: Element, ...args: Arguments) => {
     const element = query(container, ...args)
     const [{suggest = getConfig().throwSuggestions} = {}] = args.slice(-1) as [
       WithSuggest,
@@ -169,11 +166,11 @@ const wrapAllByQueryWithSuggestion =
     // But that's not supported by TS so we have to `@ts-expect-error` every callsite
     Arguments extends [...unknown[], WithSuggest],
   >(
-    query: (container: HTMLElement, ...args: Arguments) => HTMLElement[],
+    query: (container: Element, ...args: Arguments) => HTMLElement[],
     queryAllByName: string,
     variant: Variant,
   ) =>
-  (container: HTMLElement, ...args: Arguments) => {
+  (container: Element, ...args: Arguments) => {
     const els = query(container, ...args)
 
     const [{suggest = getConfig().throwSuggestions} = {}] = args.slice(-1) as [

@@ -56,7 +56,7 @@ export async function testQueryHelpers() {
   const includesAutomationId = (content: string, automationId: string) =>
     content.split(/\s+/).some(id => id === automationId)
   const queryAllByAutomationId = (
-    container: HTMLElement,
+    container: Element,
     automationId: string[] | string,
     options?: MatcherOptions,
   ) =>
@@ -136,13 +136,13 @@ export async function testQueryHelpers() {
 
 export function testBoundFunctions() {
   const boundfunctions = {} as BoundFunctions<{
-    customQueryOne: (container: HTMLElement, text: string) => HTMLElement
+    customQueryOne: (container: Element, text: string) => HTMLElement
     customQueryTwo: (
-      container: HTMLElement,
+      container: Element,
       text: string,
       text2: string,
     ) => HTMLElement
-    customQueryThree: (container: HTMLElement, number: number) => HTMLElement
+    customQueryThree: (container: Element, number: number) => HTMLElement
   }>
 
   boundfunctions.customQueryOne('one')

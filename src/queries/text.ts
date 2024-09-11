@@ -32,7 +32,7 @@ const queryAllByText: AllByText = (
   const matchNormalizer = makeNormalizer({collapseWhitespace, trim, normalizer})
   let baseArray: HTMLElement[] = []
   if (typeof container.matches === 'function' && container.matches(selector)) {
-    baseArray = [container]
+    baseArray = [container as HTMLElement]
   }
   return (
     [

@@ -14,7 +14,7 @@ import {
   buildQueries,
 } from './all-utils'
 
-const isSvgTitle = (node: HTMLElement) =>
+const isSvgTitle = (node: Element) =>
   node.tagName.toLowerCase() === 'title' &&
   node.parentElement?.tagName.toLowerCase() === 'svg'
 
